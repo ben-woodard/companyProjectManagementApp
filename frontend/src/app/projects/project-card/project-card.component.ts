@@ -9,15 +9,7 @@ import { Team } from 'src/app/interfaces/Team';
   templateUrl: './project-card.component.html',
   styleUrls: ['./project-card.component.css']
 })
-export class ProjectCardComponent implements OnInit{
-  cardProject: Project = {
-    id: 0,
-    name: '',
-    description: '',
-    active: false,
-    TeamDto: {} as Team
-  };
-
+export class ProjectCardComponent {
   @Input() project : Project | null = null;
   @Output() projectUpdated: EventEmitter<any> = new EventEmitter<any>();
   @Output() editProject: EventEmitter<Project> = new EventEmitter<Project>();
@@ -25,11 +17,6 @@ export class ProjectCardComponent implements OnInit{
   constructor(private projectService : ProjectsServiceService,
     private overlayService : OverlayServiceService
   ){}
-  ngOnInit(): void {
-    if(this.project) {
-      this.cardProject = this.project;
-    }
-  }
 
 
 

@@ -18,7 +18,9 @@
   <hr style="width: 100%;" />
 
   <div class="projects-container">
-    <app-project-card *ngFor="let project of projectsList" [project]="project" (editProject)="openOverlay('editProject', $event)"></app-project-card>
+    <app-project-card *ngFor="let project of projectsList"
+    [project]="project"
+     (editProject)="openOverlay('editProject', $event)"></app-project-card>
   </div>
 
   <!-- New Project Modal -->
