@@ -17,6 +17,7 @@ import { AnnouncementCardComponent } from './announcements/announcement-card/ann
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectCardComponent } from './projects/project-card/project-card.component';
 import { UsersComponent } from './users/users.component';
+import { ProjectFormComponent } from './projects/project-form/project-form.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
     ProjectsComponent,
     ProjectCardComponent,
     UsersComponent,
+    ProjectFormComponent,
   ],
   imports: [
     BrowserModule,

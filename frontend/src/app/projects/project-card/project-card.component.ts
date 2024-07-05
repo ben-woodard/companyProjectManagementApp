@@ -10,7 +10,7 @@ import { Team } from 'src/app/interfaces/Team';
   styleUrls: ['./project-card.component.css']
 })
 export class ProjectCardComponent {
-  @Input() project : Project | null = null;
+  @Input() project : Project | undefined = undefined;
   @Output() projectUpdated: EventEmitter<any> = new EventEmitter<any>();
   @Output() editProject: EventEmitter<Project> = new EventEmitter<Project>();
 
@@ -21,9 +21,10 @@ export class ProjectCardComponent {
 
 
 onEditClick(project: Project) {
-  if(project ){
+  if(project){
      this.editProject.emit(project);
   }
+  this.overlayService.showOverlay()
 
 }
 

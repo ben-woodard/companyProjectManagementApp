@@ -1,0 +1,32 @@
+<div class="modal-container" *ngIf="isVisible">
+  <div class="modal-background" (click)="closeOverlay()"></div>
+  <div class="modal flex-col">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="close-button"
+      (click)="closeOverlay()">
+      <path fill-rule="evenodd"
+        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z"
+        clip-rule="evenodd" />
+    </svg>
+    <form (ngSubmit)="saveProject()" [formGroup]="projectForm">
+      <div class="field">
+        <label for="projectName">Project Name</label>
+        <input id="projectName" type="text" formControlName="name">
+      </div>
+      <div class="field">
+        <label for="projectDescription">Project Description</label>
+        <textarea id="projectDescription" type="text" formControlName="description" rows="4"
+          cols="30" style="max-width: 400px; max-height: 450px"></textarea>
+      </div>
+      <div class="dropdown-container" *ngIf='user!.admin'>
+        <label for="editIsActive" class="active-title">Active?</label>
+        <select id="editIsActive" formControlName="active" name="isActive">
+          <option disabled>Pick An Option</option>
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
+        </select>
+      </div>
+      <button type="submit"> Submit </button>
+    </form>
+  </div>
+</div>
+

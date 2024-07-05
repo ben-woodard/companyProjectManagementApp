@@ -11,7 +11,7 @@
     </a>
     <h1 class='title'>Projects For {{team?.name}}</h1>
     <div class='button-container' *ngIf='user?.admin'>
-      <button class='btn' (click)="openOverlay('newProject')">New Project</button>
+      <button class='btn' (click)="openOverlay()">New Project</button>
     </div>
     <div *ngIf="!user?.admin" style="width: 65px"></div>
   </div>
@@ -20,11 +20,25 @@
   <div class="projects-container">
     <app-project-card *ngFor="let project of projectsList"
     [project]="project"
-     (editProject)="openOverlay('editProject', $event)"></app-project-card>
+     (editProject)="setSelectedProject(project)"></app-project-card>
   </div>
 
+  <app-project-form
+  [project]="selectedProject"
+  ></app-project-form>
+
+  <!-- <app-project-form
+  *ngIf="selectedProject; else newProject"
+  [project]="selectedProject"
+  ></app-project-form>
+  <ng-template #newProject>
+    <app-project-form></app-project-form>
+  </ng-template> -->
+
+
+
   <!-- New Project Modal -->
-  <div class="modal-container" *ngIf="newProjectOverlayOpen">
+  <!-- <div class="modal-container" *ngIf="newProjectOverlayOpen">
     <div class="modal-background" (click)="closeOverlay('newProject')"></div>
     <div class="modal flex-col">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="close-button"
@@ -49,10 +63,10 @@
       </form>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- edit Project Modal -->
-<div class="modal-container" *ngIf="editProjectOverlayOpen">
+<!-- <div class="modal-container" *ngIf="editProjectOverlayOpen">
   <div class="modal-background" (click)="closeOverlay('editProject')"></div>
   <div class="modal flex-col">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="close-button"
@@ -83,4 +97,4 @@
       <button (click)="updateProject()">Save</button>
     </form>
   </div>
-</div>
+</div> -->

@@ -7,6 +7,7 @@ import { CompanyService } from '../services/company.service';
 import { ProjectsServiceService } from '../services/projects.service.service';
 import { TeamServiceService } from '../services/team-service.service';
 import { UserServiceService } from '../services/user-service.service';
+import { OverlayServiceService } from '../services/overlay.service.service';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class ProjectsComponent implements OnInit {
     private companyService: CompanyService,
     private teamService: TeamServiceService,
     private projectService: ProjectsServiceService,
+    private overlayService : OverlayServiceService
   ) { }
 
   ngOnInit(): void {
@@ -82,28 +84,40 @@ export class ProjectsComponent implements OnInit {
     this.router.navigate(['/teams']);
   }
 
-  openOverlay(type: 'newProject' | 'editProject', project?: Project) {
-    if (type === 'newProject') {
-      this.newProjectOverlayOpen = true;
-      this.selectedProject = undefined;
-      this.resetForm();
-    } else if (type === 'editProject' && project) {
-      this.editProjectOverlayOpen = true;
+  setSelectedProject(project : Project | undefined) {
+    if(project) {
       this.selectedProject = project;
-      this.name = project.name || '';
-      this.description = project.description || '';
-      this.isActive = project.active || false;
     }
+    this.overlayService.showOverlay();
   }
 
-  closeOverlay(type: 'newProject' | 'editProject') {
-    if (type === 'newProject') {
-      this.newProjectOverlayOpen = false;
-      this.resetForm();
-    } else if (type === 'editProject') {
-      this.editProjectOverlayOpen = false;
-      this.selectedProject = undefined;
-    }
+  openOverlay() {
+
+    this.overlayService.showOverlay()
+
+    // if (type === 'newProject') {
+    //   this.newProjectOverlayOpen = true;
+    //   this.selectedProject = undefined;
+    //   this.resetForm();
+    // } else if (type === 'editProject' && project) {
+    //   this.editProjectOverlayOpen = true;
+    //   this.selectedProject = project;
+    //   this.name = project.name || '';
+    //   this.description = project.description || '';
+    //   this.isActive = project.active || false;
+    // }
+  }
+
+  closeOverlay() {
+
+    this.overlayService.hideOverlay()
+    // if (type === 'newProject') {
+    //   this.newProjectOverlayOpen = false;
+    //   this.resetForm();
+    // } else if (type === 'editProject') {
+    //   this.editProjectOverlayOpen = false;
+    //   this.selectedProject = undefined;
+    // }
   }
 
   resetForm() {
@@ -125,7 +139,7 @@ export class ProjectsComponent implements OnInit {
           if (data) {
             console.log('Project created successfully:', data);
             this.addProject(data);
-            this.closeOverlay('newProject');
+            this.closeOverlay();
           }
         },
         error: err => {
@@ -149,7 +163,7 @@ export class ProjectsComponent implements OnInit {
         next: data => {
           console.log('Project updated successfully:', data);
           this.updateProjects(data);
-          this.closeOverlay('editProject');
+          this.closeOverlay();
         },
         error: err => {
           this.error = err.error.message;
